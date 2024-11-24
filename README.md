@@ -7,7 +7,7 @@ Este repositorio contiene el desarrollo completo de un proyecto orientado a pred
 ## 📂 Estructura del Proyecto
 
 El proyecto está organizado de la siguiente manera:
-
+````
 ├── datos/
 ├── notebooks/
 │   ├── Toledo/
@@ -17,7 +17,7 @@ El proyecto está organizado de la siguiente manera:
 ├── src/
 ├── .gitignore
 └── README.md
-  
+  ````
 ## Notebooks
 
 Para realizar el análisis exploratorio y los modelos, sigue este orden:
