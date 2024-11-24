@@ -1,193 +1,103 @@
-<div style="text-align: center;">
-  <img src="https://github.com/Hack-io-Data/Imagenes/blob/main/01-LogosHackio/logo_naranja@4x.png?raw=true" alt="esquema" />
-</div>
+# Proyecto 7 - Predicción de Precios de Casas
 
+Este repositorio contiene el desarrollo completo de un proyecto orientado a predecir los precios de propiedades en las ciudades de Madrid y Toledo. A través de un análisis exhaustivo de datos y el desarrollo de modelos de machine learning, se busca obtener predicciones precisas basadas en múltiples características.
 
-# Proyecto: Predicción de Precios de Casas 🏠
+---
 
-## Introducción
+## 📂 Estructura del Proyecto
 
-La predicción de precios de bienes inmuebles es un área clave en la intersección de los negocios y la ciencia de datos. En este proyecto, abordarás el desafío de estimar el precio de las casas. Trabajaras con un conjunto de datos real, que contiene información detallada sobre propiedades en Madrid, como su tamaño, ubicación, número de habitaciones, tipo de propiedad, y más. El objetivo principal del proyecto es predecir el precio de una casa, 
+El proyecto está organizado de la siguiente manera:
 
-## Contexto del Problema
+├── datos/
+├── notebooks/
+│   ├── Toledo/
+│   ├── Madrid/
+│   ├── 01_EDA_GENERAL.ipynb
+│   └── CONCLUSIONES.ipynb
+├── src/
+├── .gitignore
+└── README.md
+  
+## Notebooks
 
-El mercado inmobiliario es dinámico y está influenciado por múltiples variables, como la ubicación, las características de la propiedad y las condiciones económicas. Un modelo predictivo preciso puede ser una herramienta poderosa para agentes inmobiliarios, compradores y vendedores. Este proyecto te sumergirá en la complejidad de estos factores y te enseñará cómo transformarlos en conocimiento útil para la toma de decisiones.
+Para realizar el análisis exploratorio y los modelos, sigue este orden:
 
+1. **`01_EDA_GENERAL.ipynb`**  
+   - Este notebook contiene un análisis exploratorio general sobre los datos combinados de Madrid y Toledo.
 
-## Descripción del Dataset 
+2. **`02_EDA_ETL_MADRID.ipynb` y `02_EDA_ETL_TOLEDO.ipynb`**  
+   - `02_EDA_ETL_MADRID.ipynb`: Análisis exploratorio y transformación de datos específicos para Madrid.  
+   - `02_EDA_ETL_TOLEDO.ipynb`: Análisis exploratorio y transformación de datos específicos para Toledo.
 
-Este conjunto de datos contiene información sobre propiedades en alquiler en Madrid. A continuación, se detalla la estructura y contenido de las columnas:
+3. **Notebooks de modelos por ciudad**  
+   - **Madrid**:
+     - `03_MODELO_1.ipynb`: Primer modelo desarrollado para Madrid.  
+     - `04_MODELO_2.ipynb`: Segundo modelo desarrollado para Madrid.  
+     - `05_MODELO_3.ipynb`: Tercer modelo desarrollado para Madrid.  
 
-- Columnas principales
+   - **Toledo**:
+     - `03_MODELO_1.ipynb`: Primer modelo desarrollado para Toledo.  
+     - `04_MODELO_2.ipynb`: Segundo modelo desarrollado para Toledo.  
+     - `05_MODELO_3.ipynb`: Tercer modelo desarrollado para Toledo.  
 
-    - `propertyCode`: Código único que identifica cada propiedad.
+Sigue este orden para garantizar que los datos y modelos estén correctamente alineados con el flujo de trabajo.
 
-    - `price`: Precio de la propiedad en euros (variable objetivo).
+## 🔧 Funciones Relevantes
 
-    - `propertyType`: Tipo de propiedad (e.g., piso, ático, chalet, etc.).
+La carpeta `src/` contiene las siguientes herramientas:
 
-    - `size`: Tamaño de la propiedad en metros cuadrados.
+- **[`soporte_ajuste.py`](./src/soporte_ajuste.py)**: Métodos para ajuste de hiperparámetros y optimización.
+- **[`soporte_encoding.py`](./src/soporte_encoding.py)**: Funciones para encoding de variables categóricas (one-hot, target, ordinal, etc.).
+- **[`soporte_nulos.py`](./src/soporte_nulos.py)**: Manejo de valores nulos (imputación y análisis).
+- **[`soporte_outliers.py`](./src/soporte_outliers.py)**: Métodos para detección y manejo de outliers.
+- **[`soporte_preprocesamiento.py`](./src/soporte_preprocesamiento.py)**: Preprocesamiento general de los datos.
 
-    - `rooms`: Número de habitaciones.
+---
 
-    - `bathrooms`: Número de baños.
+## ✨ Resultados Destacados
 
-    - `district`: Distrito donde se encuentra la propiedad (e.g., Centro, Hortaleza).
+Se desarrollaron modelos predictivos con un rendimiento sobresaliente en términos de **RMSE** y **R²**:
 
-    - `neighborhood`: Barrio dentro del distrito (datos menos completos que el distrito).
+- **Madrid**:
+  - Mejor modelo: RMSE = 5.24, R² = 0.99
+- **Toledo**:
+  - Mejor modelo: RMSE = 30.30, R² = 0.91
 
-    - `latitude` y `longitude`: Coordenadas geográficas de la propiedad.
+Consulta los notebooks de modelos para más detalles.
 
-    - `address`: Dirección aproximada o descriptiva de la propiedad.
+## 📊 Conclusiones
 
-- Atributos adicionales
+Todas las conclusiones obtenidas del análisis y los modelos están documentadas en el archivo [CONCLUSIONES.ipynb](./notebooks/CONCLUSIONES.ipynb).  
+Consulta este archivo para entender los resultados y las decisiones tomadas durante el proyecto.
 
-    - `numPhotos`: Número de fotos disponibles de la propiedad. 
+## 🚀 Next Steps
 
-    - `exterior`: Indicador booleano que muestra si la propiedad es exterior (True o False).
+A continuación, se detallan los próximos pasos sugeridos para mejorar y expandir este proyecto:
 
-    - `hasLift`: Indica si la propiedad tiene ascensor (True o False, con algunos valores nulos).
+1. **Optimización del Modelo**:
+   - Probar modelos más avanzados como **Gradient Boosting**, **CatBoost**, o **LightGBM** para mejorar las métricas actuales.
+   - Realizar un análisis de sensibilidad sobre los hiperparámetros más relevantes.
 
-    - `parkingSpace`: Información sobre espacio de estacionamiento (detallada en formato JSON en algunas filas).
+2. **Incorporar Nuevas Variables**:
+   - Analizar nuevas fuentes de datos que puedan enriquecer el dataset, como datos socioeconómicos, ambientales o del mercado inmobiliario.
+   - Evaluar la incorporación de interacciones entre variables existentes.
 
-    - `priceByArea`: Precio por metro cuadrado en euros.
+3. **Despliegue del Modelo**:
+   - Desplegar el modelo en una aplicación interactiva utilizando **Streamlit** para permitir predicciones en tiempo real.
+   - Documentar una interfaz clara y amigable para facilitar el uso del modelo por usuarios finales.
 
-    - `floor`: Piso en el que se encuentra la propiedad (e.g., bajo, 1, ático).
+4. **Visualización Interactiva**:
+   - Desarrollar dashboards interactivos con **Streamlit** para explorar los datos y las predicciones.
+   - Visualizar métricas clave y los factores más influyentes en las predicciones del modelo.
 
-    - `description`: Descripción textual de la propiedad.
+5. **Expansión del Proyecto**:
+   - Añadir más ciudades al análisis, enfocándose en otros mercados inmobiliarios relevantes.
+   - Adaptar el pipeline existente para procesar datos específicos de cada nueva ciudad.
 
-- Columnas de características del anuncio
+6. **Exploración de Técnicas Avanzadas**:
+   - Aplicar técnicas de **Feature Engineering** más complejas como embeddings para variables categóricas.
+   - Evaluar el uso de técnicas de **Deep Learning**, especialmente si se incluyen grandes volúmenes de datos no estructurados.
 
-    - `hasVideo`: Indica si el anuncio incluye un video (True o False).
+---
 
-    - `has3DTour`: Indica si el anuncio tiene un tour 3D disponible.
-
-    - `newDevelopment`: Booleano que indica si la propiedad es una nueva construcción.
-
-    - `superTopHighlight` y `topNewDevelopment`: Indicadores booleanos de la importancia o destaque del anuncio en la plataforma.
-
--  Características menos completas
-
-    - `neighborhood` y `district`: Aunque importantes, contienen valores nulos y pueden necesitar limpieza.
-
-    - `parkingSpace` y `labels`: Información limitada a unas pocas propiedades.
-
-    - `newDevelopmentFinished`: Solo incluye datos en propiedades específicas, con baja representación.
-
-**Nota:** El dataset tiene 40 columnas en total. Antes de construir el modelo, es importante realizar una limpieza y selección de características relevantes.
-
-
-## Pasos para el Desarrollo 
-
-1. **Carga y Exploración del Dataset**
-
-   - Comprende las variables del dataset y realiza un análisis exploratorio para identificar patrones y posibles valores atípicos.
-
-2. **Preprocesamiento de Datos**
-
-   - Limpia el dataset eliminando valores nulos o duplicados.
-
-   - Realiza una codificación de variables categóricas si es necesario.
-
-   - Escala las variables numéricas.
-
-   - Gestiona los nulos y *outliers*
-
-3. **Construcción del Modelo**
-
-   - Divide el dataset en conjuntos de entrenamiento y prueba.
-
-   - Prueba diferentes modelos de Machine Learning (e.g., regresión lineal, árboles de decisión, Random Forest, Gradient Boosting).
-
-   - Evalúa el desempeño de cada modelo utilizando métricas como el RMSE (Root Mean Squared Error) o R².
-
-
-4. **Visualización de Resultados**
-
-   - Muestra gráficos que expliquen la importancia de las variables, errores del modelo y predicciones realizadas.
-
-5. **Optimización**
-
-   - Realiza ajustes en los hiperparámetros para mejorar el desempeño del modelo.
-
-
-## Métricas de Evaluación 
-
-El desempeño del modelo será evaluado con las siguientes métricas:
-
-- **RMSE (Root Mean Squared Error):** Medirá la precisión del modelo.
-
-- **R² (Coeficiente de Determinación):** Evaluará qué tan bien el modelo explica la variación de los datos.
-
-
-## Como Entregar el Proyecto
-
-La entrega del proyecto se realizará a través de una **issue en GitHub**, trabajando en un repositorio propio en tu cuenta personal. Los pasos que deberás seguir para hacer la entrega del proyecto son:
-
-
-- **Crear un nuevo repositorio en tu cuenta de GitHub:**
-
-   - Crea un nuevo repositorio llamado `Proyecto7-NombreProyecto`. Este nombre es obligatorio, no podremos llamarlo de otra forma. 
-
-   - Configuralo como público. 
-
-
-- **Desarrolla el proyecto:**
-
-   - Implementa el código para la resolución del problema.
-
-   - Recuerda hacer commits regulares mientras avanzas en el desarrollo:
-
-     ```bash
-     git add .
-     git commit -m "Descripción del avance"
-     git push
-     ```
-
-
-- **Crear una issue en el repositorio original del curso:**
-
-   - Ve al repositorio original del curso y dirígete a la pestaña de **Issues**.
-
-- **Abrir una nueva issue para tu entrega:**
-
-   - Haz clic en **New Issue** y llena los siguientes campos:
-
-     - **Título:** Usa el formato "Entrega Proyecto: ProyectoRegresionLineal - [Tu Nombre]".
-
-     - **Descripción:** En la descripción, incluye:
-
-       - Una breve explicación de tu proyecto.
-
-       - Instrucciones para ejecutar tu código (si aplica).
-
-       - Un enlace a tu repositorio personal donde está alojado el proyecto.
-
-
-## 🚀 Entrega del Proyecto 🚀
-
-**Fecha y hora límite:**
-
-🗓️ **Lunes a las 9:00 AM.**
-
-
-**Nota importante:**
-
-⚠️ **Todos los proyectos que sean entregados o modificados después de la hora límite (lunes a las 9:00 AM) se considerarán como no entregados.** Por favor, asegúrate de completar y enviar tu trabajo a tiempo para evitar problemas.
-
-
-# 🎤 Presentación de Proyectos 🎤
-
-El lunes tendremos las **presentaciones de los proyectos**. La dinámica será la siguiente:
-
-- De forma **aleatoria**, seleccionaremos entre **3 y 5 alumnos** para presentar su proyecto.
-
-- Cada alumno tendrá **5 minutos** para explicar su proyecto y hacer una demo en vivo. Durante este tiempo podrán mostrar cómo funciona su juego y resaltar las características principales.
-
-**Detalles importantes:**
-
-- Es importante que lleguéis puntuales, ya que comenzaremos las presentaciones de inmediato.
-
-- Asegúrate de que tu código esté listo y funcional para la demo.
-
-- Todos debemos estar preparados para presentar, ya que la selección será completamente aleatoria.
+Con estos pasos, el proyecto puede continuar mejorando y adaptándose a las necesidades del análisis y predicción en el mercado inmobiliario.
